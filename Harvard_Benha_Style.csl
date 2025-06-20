@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0">
+  <info>
+    <title>Harvard Style - Benha University</title>
+    <id>http://www.zotero.org/styles/harvard-benha</id>
+    <author>
+      <name>Custom CSL by ChatGPT</name>
+    </author>
+    <category citation-format="author-date"/>
+    <updated>2025-06-20T00:00:00+00:00</updated>
+  </info>
+
+  <macro name="author">
+    <names variable="author">
+      <name name-as-sort-order="all" delimiter=", " initialize-with="."/>
+      <label form="short" prefix=" " text-case="lowercase"/>
+      <substitute>
+        <text macro="editor"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="issued">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="title">
+    <text variable="title" suffix="."/>
+  </macro>
+
+  <macro name="publisher">
+    <group delimiter=": ">
+      <text variable="publisher-place"/>
+      <text variable="publisher"/>
+    </group>
+  </macro>
+
+  <macro name="pages">
+    <text variable="page" prefix="pp. "/>
+  </macro>
+
+  <citation collapse="year-suffix" disambiguate-add-year-suffix="true">
+    <sort>
+      <key variable="issued"/>
+    </sort>
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <names variable="author">
+          <name form="long" et-al-min="4" et-al-use-first="1" delimiter=", "/>
+        </names>
+        <date variable="issued">
+          <date-part name="year"/>
+        </date>
+      </group>
+    </layout>
+  </citation>
+
+  <bibliography hanging-indent="false">
+    <sort>
+      <key macro="author"/>
+      <key variable="issued"/>
+    </sort>
+    <layout>
+      <names variable="author">
+        <name name-as-sort-order="all" initialize-with="." delimiter=", "/>
+      </names>
+      <date variable="issued" prefix=" (" suffix="). "/>
+      <text macro="title"/>
+      <choose>
+        <if type="book">
+          <group delimiter=". ">
+            <text variable="edition" suffix=" edn"/>
+            <text macro="publisher"/>
+            <text macro="pages"/>
+          </group>
+        </if>
+        <if type="chapter">
+          <group delimiter=". ">
+            <text variable="container-title" prefix="In: "/>
+            <text macro="publisher"/>
+            <text macro="pages"/>
+          </group>
+        </if>
+        <if type="article-journal">
+          <group delimiter=", ">
+            <text variable="container-title"/>
+            <text variable="volume"/>
+            <text variable="page"/>
+          </group>
+        </if>
+        <if type="paper-conference">
+          <group delimiter=", ">
+            <text variable="event"/>
+            <text macro="publisher"/>
+            <text macro="pages"/>
+          </group>
+        </if>
+        <if type="webpage">
+          <group delimiter=", ">
+            <text variable="URL"/>
+            <date variable="accessed" prefix="viewed ">
+              <date-part name="day"/>
+              <date-part name="month"/>
+              <date-part name="year"/>
+            </date>
+          </group>
+        </if>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
