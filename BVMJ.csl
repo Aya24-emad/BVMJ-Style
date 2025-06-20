@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0">
+  <info>
+    <title>BVMJ Style</title>
+    <id>http://www.zotero.org/styles/bvmj</id>
+    <link href="http://www.zotero.org/styles/bvmj" rel="self"/>
+    <author>
+      <name>Custom CSL by ChatGPT</name>
+    </author>
+    <category citation-format="author-date"/>
+    <updated>2025-06-20T00:00:00+00:00</updated>
+  </info>
+  
+  <macro name="author">
+    <names variable="author">
+      <name name-as-sort-order="all" delimiter=", " initialize-with="."/>
+      <label form="short" prefix=" " text-case="lowercase"/>
+      <substitute>
+        <text macro="editor"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="et-al-author">
+    <names variable="author">
+      <name name-as-sort-order="all" delimiter=", " initialize-with="." et-al-min="11" et-al-use-first="10"/>
+    </names>
+  </macro>
+
+  <macro name="issued">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="title">
+    <text variable="title"/>
+  </macro>
+
+  <macro name="journal-title">
+    <text variable="container-title"/>
+  </macro>
+
+  <macro name="pages">
+    <text variable="page"/>
+  </macro>
+
+  <macro name="volume">
+    <text variable="volume"/>
+  </macro>
+
+  <macro name="publisher">
+    <group delimiter=", ">
+      <text variable="publisher"/>
+      <text variable="publisher-place"/>
+    </group>
+  </macro>
+
+  <citation collapse="year-suffix" disambiguate-add-year-suffix="true">
+    <sort>
+      <key variable="issued"/>
+    </sort>
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <names variable="author">
+          <name form="long" et-al-min="3" et-al-use-first="1" delimiter=", "/>
+        </names>
+        <date variable="issued">
+          <date-part name="year"/>
+        </date>
+      </group>
+    </layout>
+  </citation>
+
+  <bibliography hanging-indent="false">
+    <sort>
+      <key macro="author"/>
+      <key variable="issued"/>
+    </sort>
+    <layout>
+      <text macro="et-al-author" suffix=", "/>
+      <text macro="issued" suffix=". "/>
+      <text macro="title" suffix=". "/>
+      <choose>
+        <if type="article-journal">
+          <text macro="journal-title" suffix=" "/>
+          <text macro="volume" suffix=", "/>
+          <text macro="pages" suffix="."/>
+        </if>
+        <if type="book">
+          <text variable="container-title" suffix=". "/>
+          <text macro="publisher" suffix=", "/>
+          <text variable="page" prefix="pp. " suffix="."/>
+        </if>
+        <if type="chapter">
+          <text variable="container-title" prefix="In: " suffix=". "/>
+          <text macro="publisher" suffix=", "/>
+          <text variable="page" prefix="pp. " suffix="."/>
+        </if>
+        <if type="paper-conference">
+          <text variable="container-title" suffix=", "/>
+          <text variable="event-place" suffix=", "/>
+          <text variable="event-date" suffix=", "/>
+          <text variable="page" prefix="pp. " suffix="."/>
+        </if>
+        <if type="thesis">
+          <text variable="genre" suffix=", "/>
+          <text variable="publisher" suffix=", "/>
+          <text variable="publisher-place" suffix="."/>
+        </if>
+        <if type="webpage">
+          <text variable="title" suffix=", "/>
+          <text variable="URL" suffix="."/>
+          <text variable="accessed" prefix=" (accessed " suffix=")."/>
+        </if>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
